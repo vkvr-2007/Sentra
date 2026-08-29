@@ -1,0 +1,8 @@
+id,ip_address,threat_type,risk_level,status,event_time
+"7","192.168.2.40","XSS Attempt","Medium","Monitoring","2026-08-28T14:39:39.345Z"
+"6","172.16.8.21","SQL Injection","High","Blocked","2026-08-28T14:39:39.345Z"
+"5","10.10.20.15","Brute Force","Medium","Review","2026-08-28T14:39:39.345Z"
+"4","192.168.1.35","Malware","Critical","Blocked","2026-08-28T14:39:39.345Z"
+"3","172.16.4.51","XSS Attempt","High","Blocked","2026-08-28T14:39:39.345Z"
+"2","10.24.18.92","Brute Force","High","Monitoring","2026-08-28T14:39:39.345Z"
+"1","192.168.1.24","SQL Injection","Critical","Blocked","2026-08-28T14:39:39.345Z"
