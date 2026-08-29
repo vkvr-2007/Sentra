@@ -1,14 +1,20 @@
-# SecureFlow — Security Event Monitoring & Analytics Dashboard
+# SecureFlow — Full‑stack Security Event Monitoring Dashboard
 
-A full-stack security event monitoring platform built with **React**, **Express.js**, and **PostgreSQL**. SecureFlow provides a professional dashboard for analyzing security threats, monitoring suspicious activities, and generating actionable security reports.
+A full-stack security event monitoring platform built with **React**, **Express.js**, and **PostgreSQL**. SecureFlow provides a professional dashboard for analyzing security threats, monitoring suspicious activity, and exporting security data — built as a portfolio project for learning and demonstration.
 
-**Live Demo Available** | [GitHub Repository](https://github.com/sanojsethi/SecureFlow) | Built for Portfolio / Learning
+Portfolio Project | [GitHub Repository](https://github.com/sanojsethi/SecureFlow) | Built for Portfolio / Learning
+
+---
+
+<p align="center">
+  <img src="./secureflow-dashboard.png" alt="SecureFlow Security Event Monitoring Dashboard" width="900">
+</p>
 
 ---
 
 ## Project Overview
 
-SecureFlow is a production-ready Security Operations Center (SOC) dashboard designed to help security teams monitor, track, and respond to security events in real-time. The application aggregates security event data from a PostgreSQL database and presents it through an intuitive web interface with filtering, visualization, and reporting capabilities.
+SecureFlow is a full‑stack security event monitoring dashboard (portfolio project) designed to help security teams monitor, track, and respond to security events. The application aggregates security events from an API and a PostgreSQL backend, and displays metrics, trends, and event details through a responsive UI.
 
 ### Problem Statement
 
@@ -19,7 +25,7 @@ Security teams need a centralized platform to:
 - **Analyze** threat patterns and event trends
 - **Export** security data for compliance and audits
 
-SecureFlow addresses these needs with a clean, responsive interface backed by a robust REST API.
+SecureFlow addresses these needs with a clean, responsive interface backed by a REST API and PostgreSQL data store.
 
 ---
 
@@ -149,7 +155,7 @@ secureflow/
 ## Dashboard Functionality
 
 ### Main Dashboard View
-The dashboard displays a comprehensive security overview:
+The dashboard displays a concise security overview:
 
 - **Metric Cards** (Top Row):
   - Total Security Events: Count of all events in the database
@@ -365,6 +371,29 @@ cd ..
 
 ---
 
+## Run Locally
+
+A short guide to run the project locally for development (concise):
+
+1. Create and seed the PostgreSQL database (see Backend Setup section).
+2. Add environment variables in `server/.env` (PGUSER, PGPASSWORD, PGHOST, PGPORT, PGDATABASE, PORT).
+3. Start the backend server:
+
+```bash
+cd server
+node server.js
+```
+
+4. Start the frontend dev server (from project root):
+
+```bash
+npm run dev
+```
+
+5. Open the frontend at `http://localhost:5173` and verify the API health at `http://localhost:5000/api/health`.
+
+---
+
 ## Frontend Setup
 
 ### Development Environment
@@ -379,7 +408,7 @@ cd ..
    ```bash
    npm run build
    ```
-   Optimized files go to the `dist/` directory
+   Generates optimized production build files in the `dist/` directory
 
 3. **Lint the code:**
    ```bash
@@ -630,7 +659,7 @@ The Vite build process:
 - Minifies JavaScript and CSS
 - Code-splits for lazy loading
 - Optimizes asset bundling
-- Generates production-ready files in `dist/`
+- Generates optimized production build files in `dist/`
 
 ```bash
 npm run build        # Creates optimized build
@@ -779,10 +808,10 @@ LinkedIn: [linkedin.com/in/sanojsethi](https://www.linkedin.com/in/sanojsethi)
 **SecureFlow**  
 📍 [github.com/sanojsethi/SecureFlow](https://github.com/sanojsethi/SecureFlow)
 
-**Repository Statistics:**
-- Full-stack application
+**Repository Summary:**
+- Full-stack portfolio application
 - Frontend + Backend + Database
-- Production-ready code structure
+- Well-structured codebase suitable for portfolio review
 
 **Connect:**
 - ⭐ Star the repository if you find it useful
