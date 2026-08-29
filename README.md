@@ -6,12 +6,6 @@ Portfolio Project | [GitHub Repository](https://github.com/sanojsethi/SecureFlow
 
 ---
 
-<p align="center">
-  <img src="./secureflow-dashboard.png" alt="SecureFlow Security Event Monitoring Dashboard" width="900">
-</p>
-
----
-
 ## Project Overview
 
 SecureFlow is a full‑stack security event monitoring dashboard (portfolio project) designed to help security teams monitor, track, and respond to security events. The application aggregates security events from an API and a PostgreSQL backend, and displays metrics, trends, and event details through a responsive UI.
@@ -48,6 +42,10 @@ SecureFlow addresses these needs with a clean, responsive interface backed by a 
 - **Risk Level Distribution**: Visual breakdown of events by severity
 - **Live Event Table**: Real-time security event listings with IP addresses, threat types, and timestamps
 - **Recent Activity**: Latest events with quick-access detail modals
+- <p align="center">
+  <img src="https://github.com/user-attachments/assets/190adf32-7723-47c3-92bf-bdfb2b5b3825" />
+  <img src="https://github.com/user-attachments/assets/7c477ae5-0ae0-44e7-bff3-ff2a1b42d615" />
+</p>
 
 ### Security Analysis
 - Event filtering by risk level
