@@ -1,6 +1,6 @@
 # SecureFlow — Full‑Stack Security Event Monitoring Dashboard
 
-A full-stack security event monitoring platform built with **React**, **Express.js**, and **PostgreSQL**. SecureFlow provides a professional dashboard for analyzing security threats, monitoring suspicious activities, and tracking incident responses.
+A full-stack security event monitoring platform built with **React**, **Express.js**, and **PostgreSQL**. SecureFlow provides a professional dashboard for analyzing security threats, monitoring suspic[...]
 
 **Portfolio Project** | [View Repository](https://github.com/sanojsethi/SecureFlow) | Built for Portfolio & Learning
 
@@ -17,7 +17,7 @@ A full-stack security event monitoring platform built with **React**, **Express.
 
 ## Project Overview
 
-SecureFlow is a full-stack security event monitoring dashboard designed to help security teams monitor, track, and respond to security events in real time. The application aggregates security events from a PostgreSQL database and presents them through an intuitive React interface backed by a REST API.
+SecureFlow is a full-stack security event monitoring dashboard designed to help security teams monitor, track, and respond to security events with auto-refresh monitoring. The application aggregates security events f[...]
 
 ### Problem Statement
 
@@ -37,7 +37,7 @@ SecureFlow addresses these needs with a clean, responsive interface backed by a 
 This project demonstrates essential full-stack engineering competencies:
 
 **Backend Architecture & REST API Design**
-- Designed and implemented three core REST endpoints (`/api/health`, `/api/security-events`, `/api/threat-summary`) handling real-time data retrieval and aggregation
+- Designed and implemented three core REST endpoints (`/api/health`, `/api/security-events`, `/api/threat-summary`) handling data retrieval and aggregation
 - Built with Express.js following RESTful principles with proper HTTP status codes and error handling
 - Implemented CORS configuration for secure cross-origin communication
 
@@ -53,7 +53,7 @@ This project demonstrates essential full-stack engineering competencies:
 
 **Real-World Feature Implementation**
 - CSV export functionality for compliance reporting
-- Live data refresh with configurable polling intervals
+- Auto-refresh monitoring with configurable polling intervals
 - Status tracking and event filtering across multiple data dimensions
 
 ---
@@ -61,7 +61,7 @@ This project demonstrates essential full-stack engineering competencies:
 ## Project Objectives
 
 1. Build a **full-stack application** demonstrating backend API development, database integration, and frontend UI skills
-2. Implement **real-time data fetching** with configurable refresh intervals
+2. Implement **auto-refresh data fetching** with configurable polling intervals
 3. Provide **filtering, sorting, and search** capabilities for security events
 4. Enable **CSV export** for reporting and analysis
 5. Demonstrate **React state management**, **REST API design**, and **PostgreSQL integration**
@@ -74,7 +74,7 @@ This project demonstrates essential full-stack engineering competencies:
 - **Metric Cards**: Total events, Critical/High risk count, blocked events, events requiring review
 - **Threat Type Analysis**: Aggregated counts by threat category (SQL Injection, XSS, Brute Force, Malware)
 - **Risk Level Distribution**: Visual breakdown of events by severity
-- **Live Event Table**: Real-time security event listings with IP addresses, threat types, and timestamps
+- **Event Table**: Security event listings with IP addresses, threat types, and timestamps
 - **Recent Activity**: Latest events with quick-access detail modals
 
 ### Security Analysis
@@ -98,11 +98,11 @@ This project demonstrates essential full-stack engineering competencies:
 ### Admin Features
 - User profile management (name, email, role)
 - API connection settings and health monitoring
-- Live monitoring toggle with configurable refresh intervals
+- Auto-refresh toggle with configurable polling intervals
 - Database connection status display
 
 ### Settings & Configuration
-- **Live Monitoring**: Enable/disable auto-refresh
+- **Auto-Refresh Monitoring**: Enable/disable auto-polling
 - **Refresh Interval**: Adjustable polling frequency (5–60 seconds)
 - **Notifications**: Toggle alert notifications
 - **Compact Dashboard**: Toggle for UI density
@@ -115,10 +115,10 @@ This project demonstrates essential full-stack engineering competencies:
 | Component | Technology |
 |-----------|-----------|
 | **Frontend Framework** | React 19.2 |
-| **Build Tool** | Vite 8 |
+| **Build Tool** | Vite 8.2 |
 | **Language** | JavaScript (ES6+) |
 | **Styling** | CSS3 |
-| **Backend** | Node.js + Express 5 |
+| **Backend** | Node.js + Express 5.2 |
 | **Database** | PostgreSQL |
 | **API Communication** | REST (Fetch API) |
 | **Data Import** | CSV parsing |
@@ -192,7 +192,7 @@ The dashboard displays a concise security overview:
 
 - **Threat Analysis**:
   - Bar chart of threat type distribution
-  - Real-time counts aggregated from the database
+  - Aggregated counts from the database
   - Sortable by frequency
 
 - **Risk Level Breakdown**:
@@ -692,7 +692,7 @@ npm run preview      # Preview production build locally
 - [ ] Threat summary aggregates correctly
 - [ ] CSV export downloads file
 - [ ] Filters and search work
-- [ ] Live monitoring refresh works
+- [ ] Auto-refresh polling works
 - [ ] Settings persist in localStorage
 
 ### Debugging
@@ -724,7 +724,7 @@ fetch("http://localhost:5000/api/health")
 ### Feature Enhancements
 - [ ] User authentication with JWT tokens
 - [ ] Role-based access control (RBAC) implementation
-- [ ] Real-time WebSocket notifications for new events
+- [ ] Advanced event pagination (limit/offset)
 - [ ] Advanced filtering (date range, custom queries)
 - [ ] Event severity trend analysis (charts/graphs)
 - [ ] Automated alert rules and escalation policies
@@ -732,43 +732,43 @@ fetch("http://localhost:5000/api/health")
 - [ ] Integration with SIEM systems (Splunk, ELK)
 
 ### Performance Optimization
-- [ ] Implement event pagination (limit/offset)
 - [ ] Add database indexing on frequently queried columns
 - [ ] Caching layer (Redis) for threat summaries
 - [ ] API rate limiting
 - [ ] Frontend code splitting and lazy loading
 
-### Infrastructure
+### Infrastructure & Deployment
 - [ ] Docker containerization (Dockerfile, docker-compose)
 - [ ] Kubernetes deployment manifests
 - [ ] CI/CD pipeline (GitHub Actions)
 - [ ] Automated testing (Jest, React Testing Library)
 - [ ] Production database backup strategy
-
-### Security Enhancements
 - [ ] HTTPS/TLS encryption
-- [ ] Input validation and sanitization
-- [ ] SQL injection prevention (parameterized queries)
-- [ ] CORS whitelist configuration
+- [ ] Security headers (CSP, HSTS)
+
+### Security Hardening (Production-Only)
+- [ ] Input validation and sanitization layer
 - [ ] API key authentication
 - [ ] Rate limiting and DDoS protection
-- [ ] Security headers (CSP, HSTS)
 - [ ] Audit logging
+- [ ] Database encryption at rest
+- [ ] Parameterized queries (currently implemented)
 
 ---
 
 ## Security Considerations
 
-### Current Implementation
+### Current Implementation ✓
 
-✓ **CORS Enabled**: Backend accepts requests from frontend  
-✓ **Environment Variables**: Secrets stored outside codebase  
-✓ **Parameterized Queries**: SQL injection prevention (node-pg)  
-✓ **Status Codes**: Proper HTTP error responses  
+- ✓ **CORS Enabled**: Backend accepts requests from frontend  
+- ✓ **Environment Variables**: Secrets stored outside codebase  
+- ✓ **Parameterized Queries**: SQL injection prevention (node-pg)  
+- ✓ **Status Codes**: Proper HTTP error responses  
 
-### Recommendations for Production
+### ⚠️ Portfolio Disclaimer
 
-⚠️ **Not Implemented** (for demo/portfolio purposes):
+This project is **portfolio-focused** and demonstrates core full-stack competencies. The following production security features are intentionally not implemented for demo purposes:
+
 - User authentication (JWT, OAuth)
 - Authorization checks (role-based access)
 - HTTPS/TLS encryption
@@ -778,7 +778,7 @@ fetch("http://localhost:5000/api/health")
 - Database encryption
 - Security headers
 
-For production deployment, implement the items above based on your organization's security requirements.
+**For production deployment**, implement these features based on your organization's security requirements and compliance standards.
 
 ---
 
@@ -791,6 +791,7 @@ For production deployment, implement the items above based on your organization'
 - ✓ CSV export capability
 - ✓ Settings and user profile management
 - ✓ API health monitoring
+- ✓ Auto-refresh monitoring with configurable intervals
 
 ### Version 1.1 (Planned)
 - [ ] Event detail drill-down with related incidents
@@ -800,10 +801,11 @@ For production deployment, implement the items above based on your organization'
 
 ### Version 2.0 (Planned)
 - [ ] User authentication and authorization
-- [ ] Real-time WebSocket updates
+- [ ] WebSocket support for event streaming
 - [ ] Elasticsearch integration for full-text search
 - [ ] Grafana dashboard embeds
 - [ ] SIEM API connectors
+- [ ] Production security hardening
 
 ---
 
