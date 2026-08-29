@@ -1,14 +1,23 @@
-# SecureFlow — Full‑stack Security Event Monitoring Dashboard
+# SecureFlow — Full‑Stack Security Event Monitoring Dashboard
 
-A full-stack security event monitoring platform built with **React**, **Express.js**, and **PostgreSQL**. SecureFlow provides a professional dashboard for analyzing security threats, monitoring suspicious activity, and exporting security data — built as a portfolio project for learning and demonstration.
+A full-stack security event monitoring platform built with **React**, **Express.js**, and **PostgreSQL**. SecureFlow provides a professional dashboard for analyzing security threats, monitoring suspicious activities, and tracking incident responses.
 
-Portfolio Project | [GitHub Repository](https://github.com/sanojsethi/SecureFlow) | Built for Portfolio / Learning
+**Portfolio Project** | [View Repository](https://github.com/sanojsethi/SecureFlow) | Built for Portfolio & Learning
+
+---
+
+## Dashboard Preview
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/190adf32-7723-47c3-92bf-bdfb2b5b3825" width="48%" alt="SecureFlow Dashboard Overview" />
+  <img src="https://github.com/user-attachments/assets/7c477ae5-0ae0-44e7-bff3-ff2a1b42d615" width="48%" alt="SecureFlow Dashboard Details" />
+</p>
 
 ---
 
 ## Project Overview
 
-SecureFlow is a full‑stack security event monitoring dashboard (portfolio project) designed to help security teams monitor, track, and respond to security events. The application aggregates security events from an API and a PostgreSQL backend, and displays metrics, trends, and event details through a responsive UI.
+SecureFlow is a full-stack security event monitoring dashboard designed to help security teams monitor, track, and respond to security events in real time. The application aggregates security events from a PostgreSQL database and presents them through an intuitive React interface backed by a REST API.
 
 ### Problem Statement
 
@@ -19,7 +28,33 @@ Security teams need a centralized platform to:
 - **Analyze** threat patterns and event trends
 - **Export** security data for compliance and audits
 
-SecureFlow addresses these needs with a clean, responsive interface backed by a REST API and PostgreSQL data store.
+SecureFlow addresses these needs with a clean, responsive interface backed by a robust REST API and PostgreSQL data store.
+
+---
+
+## Why This Project Matters
+
+This project demonstrates essential full-stack engineering competencies:
+
+**Backend Architecture & REST API Design**
+- Designed and implemented three core REST endpoints (`/api/health`, `/api/security-events`, `/api/threat-summary`) handling real-time data retrieval and aggregation
+- Built with Express.js following RESTful principles with proper HTTP status codes and error handling
+- Implemented CORS configuration for secure cross-origin communication
+
+**Database Design & SQL Optimization**
+- Architected PostgreSQL schema for scalable event storage
+- Optimized queries using SQL `GROUP BY` and `ORDER BY` for efficient threat aggregation
+- Demonstrated timestamp handling, data integrity, and relational database best practices
+
+**Full-Stack Integration**
+- Connected React frontend directly to Express backend via Fetch API
+- Managed environment variables and secure credential handling with `.env` configuration
+- Built end-to-end data flow from database → API → UI with error handling at each layer
+
+**Real-World Feature Implementation**
+- CSV export functionality for compliance reporting
+- Live data refresh with configurable polling intervals
+- Status tracking and event filtering across multiple data dimensions
 
 ---
 
@@ -27,10 +62,9 @@ SecureFlow addresses these needs with a clean, responsive interface backed by a 
 
 1. Build a **full-stack application** demonstrating backend API development, database integration, and frontend UI skills
 2. Implement **real-time data fetching** with configurable refresh intervals
-3. Create **role-based access control** (Security Administrator, Security Analyst, Viewer)
-4. Provide **filtering, sorting, and search** capabilities for security events
-5. Enable **CSV export** for reporting and analysis
-6. Demonstrate **React state management**, **REST API design**, and **PostgreSQL integration**
+3. Provide **filtering, sorting, and search** capabilities for security events
+4. Enable **CSV export** for reporting and analysis
+5. Demonstrate **React state management**, **REST API design**, and **PostgreSQL integration**
 
 ---
 
@@ -42,10 +76,6 @@ SecureFlow addresses these needs with a clean, responsive interface backed by a 
 - **Risk Level Distribution**: Visual breakdown of events by severity
 - **Live Event Table**: Real-time security event listings with IP addresses, threat types, and timestamps
 - **Recent Activity**: Latest events with quick-access detail modals
-- <p align="center">
-  <img src="https://github.com/user-attachments/assets/190adf32-7723-47c3-92bf-bdfb2b5b3825" />
-  <img src="https://github.com/user-attachments/assets/7c477ae5-0ae0-44e7-bff3-ff2a1b42d615" />
-</p>
 
 ### Security Analysis
 - Event filtering by risk level
@@ -70,7 +100,6 @@ SecureFlow addresses these needs with a clean, responsive interface backed by a 
 - API connection settings and health monitoring
 - Live monitoring toggle with configurable refresh intervals
 - Database connection status display
-- User account creation (demo mode)
 
 ### Settings & Configuration
 - **Live Monitoring**: Enable/disable auto-refresh
@@ -371,7 +400,7 @@ cd ..
 
 ## Run Locally
 
-A short guide to run the project locally for development (concise):
+A short guide to run the project locally for development:
 
 1. Create and seed the PostgreSQL database (see Backend Setup section).
 2. Add environment variables in `server/.env` (PGUSER, PGPASSWORD, PGHOST, PGPORT, PGDATABASE, PORT).
@@ -590,22 +619,6 @@ checkHealth();
 
 ---
 
-## Screenshots
-
-### Dashboard View
-*Displays metric cards, threat analysis, risk distribution, and live event table*
-
-### Alerts Page
-*Filter and search security events by risk level, status, threat type*
-
-### Reports Section
-*Generate and export security summary reports*
-
-### Settings Panel
-*Configure API connection, refresh intervals, and notification preferences*
-
----
-
 ## Skills Demonstrated
 
 ### Frontend Development
@@ -618,25 +631,26 @@ checkHealth();
 - ✓ CSV export functionality
 
 ### Backend Development
-- ✓ Express.js REST API design
+- ✓ Express.js REST API design and implementation
 - ✓ CORS configuration for cross-origin requests
 - ✓ PostgreSQL integration with node-pg
 - ✓ SQL query optimization (GROUP BY, ORDER BY)
 - ✓ Environment variable management (dotenv)
 - ✓ Error handling and HTTP status codes
-- ✓ Health check endpoints
+- ✓ Health check endpoints and monitoring
 
 ### Database Design
-- ✓ PostgreSQL table design
+- ✓ PostgreSQL table design and schema planning
 - ✓ Data aggregation and grouping (SQL GROUP BY)
 - ✓ Timestamp handling and timezone awareness
 - ✓ Query optimization for performance
 
-### DevOps & Deployment
-- ✓ Git version control
+### DevOps & Development Practices
+- ✓ Git version control and repository management
 - ✓ npm package management
-- ✓ Environment configuration
+- ✓ Environment configuration and secrets management
 - ✓ Development vs. production builds
+- ✓ Code quality with ESLint
 
 ---
 
