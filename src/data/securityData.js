@@ -1,7 +1,9 @@
 export const navItems = [
-  ["Dashboard", "📊"],
-  ["Security", "🛡️"],
-  ["Alerts", "🚨"],
+  ["Overview", "◫"],
+  ["Threats", "🛡️"],
+  ["Incidents", "⚑"],
+  ["Events", "▣"],
+  ["Analytics", "◌"],
   ["Reports", "📄"],
   ["Settings", "⚙️"],
 ];
