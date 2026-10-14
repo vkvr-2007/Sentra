@@ -1,19 +1,19 @@
 :root {
-  --page-bg: #F6F8FB;
-  --surface: #FFFFFF;
-  --surface-alt: #F8FAFC;
-  --surface-soft: #EFF6FF;
-  --border: #E2E8F0;
-  --border-strong: #CBD5E1;
-  --text: #111827;
-  --muted: #64748B;
-  --brand: #2563EB;
-  --brand-soft: #EFF6FF;
-  --success: #16A34A;
-  --warning: #D97706;
-  --critical: #DC2626;
-  --info: #0EA5E9;
-  --shadow: rgba(15, 23, 42, 0.08);
+  --page-bg: #E9EEE8;
+  --surface: #FAFBF7;
+  --surface-alt: #F0F3ED;
+  --surface-soft: #E2EBE3;
+  --border: #D6DFD9;
+  --border-strong: #BBCAC1;
+  --text: #17272B;
+  --muted: #667876;
+  --brand: #227A75;
+  --brand-soft: #E1ECE6;
+  --success: #397858;
+  --warning: #B87542;
+  --critical: #BD5949;
+  --info: #547F84;
+  --shadow: rgba(23, 39, 43, 0.08);
 }
 
 * { box-sizing: border-box; }
@@ -28,7 +28,7 @@ body {
 button, input, select { font: inherit; }
 button { cursor: pointer; }
 button:focus-visible, input:focus-visible, select:focus-visible {
-  outline: 2px solid rgba(37, 99, 235, 0.55);
+  outline: 2px solid rgba(34, 122, 117, 0.55);
   outline-offset: 2px;
 }
 #root { min-height: 100vh; }
@@ -36,7 +36,7 @@ button:focus-visible, input:focus-visible, select:focus-visible {
 .dashboard {
   display: flex;
   min-height: 100vh;
-  background: linear-gradient(180deg, #f7f9fc 0%, #f4f7fb 100%);
+  background: linear-gradient(180deg, #F1F3ED 0%, #E9EEE8 100%);
 }
 
 .sidebar {
@@ -44,7 +44,7 @@ button:focus-visible, input:focus-visible, select:focus-visible {
   inset: 0 auto 0 0;
   width: 240px;
   padding: 26px 18px 18px;
-  background: rgba(255, 255, 255, 0.82);
+  background: rgba(250, 251, 247, 0.88);
   backdrop-filter: blur(18px);
   border-right: 1px solid var(--border);
 }
@@ -63,7 +63,7 @@ button:focus-visible, input:focus-visible, select:focus-visible {
   height: 34px;
   border-radius: 10px;
   background: var(--brand);
-  box-shadow: 0 10px 22px rgba(37, 99, 235, 0.22);
+  box-shadow: 0 10px 22px rgba(34, 122, 117, 0.2);
   color: #fff;
   font-size: 18px;
   font-weight: 800;
@@ -286,7 +286,7 @@ button:focus-visible, input:focus-visible, select:focus-visible {
 }
 
 .card:hover {
-  border-color: rgba(37, 99, 235, 0.25);
+  border-color: rgba(34, 122, 117, 0.25);
   transform: translateY(-2px);
   box-shadow: 0 12px 28px rgba(15, 23, 42, 0.05);
 }
@@ -329,7 +329,7 @@ button:focus-visible, input:focus-visible, select:focus-visible {
 .card-red .card-icon { background: rgba(220, 38, 38, 0.08); color: var(--critical); }
 .card-amber .card-icon { background: rgba(217, 119, 6, 0.1); color: var(--warning); }
 .card-green .card-icon { background: rgba(22, 163, 74, 0.08); color: var(--success); }
-.card-blue .card-icon { background: rgba(37, 99, 235, 0.08); color: var(--brand); }
+.card-blue .card-icon { background: rgba(34, 122, 117, 0.1); color: var(--brand); }
 
 .data-source {
   display: flex;
@@ -393,7 +393,7 @@ button:focus-visible, input:focus-visible, select:focus-visible {
   display: block;
   height: 9px;
   border-radius: 999px;
-  background: linear-gradient(90deg, var(--brand) 0%, #4f8cff 100%);
+  background: linear-gradient(90deg, var(--brand) 0%, #6CA99A 100%);
 }
 
 .risk-list { display: grid; gap: 16px; margin-top: 22px; }
@@ -437,11 +437,11 @@ button:focus-visible, input:focus-visible, select:focus-visible {
 .badge.blocked { background: rgba(220, 38, 38, 0.08); color: var(--critical); }
 .badge.high,
 .badge.review { background: rgba(217, 119, 6, 0.12); color: var(--warning); }
-.badge.medium { background: rgba(59, 130, 246, 0.08); color: #1d4ed8; }
+.badge.medium { background: rgba(195, 109, 73, 0.12); color: #A55238; }
 .badge.low,
-.badge.resolved,
-.badge.monitoring { background: rgba(37, 99, 235, 0.08); color: var(--brand); }
-.badge.monitoring { background: rgba(14, 165, 233, 0.08); color: #0369a1; }
+.badge.resolved { background: rgba(57, 120, 88, 0.1); color: var(--success); }
+.badge.monitoring { background: rgba(34, 122, 117, 0.1); color: var(--brand); }
+.badge.low { background: rgba(57, 120, 88, 0.1); color: var(--success); }
 
 .table-panel { margin-bottom: 18px; }
 .table-actions,
@@ -497,11 +497,11 @@ td { color: var(--text); font-size: 12px; }
 .text-button:hover,
 .secondary-action:hover,
 .row-action:hover {
-  border-color: rgba(37, 99, 235, 0.2);
+  border-color: rgba(34, 122, 117, 0.2);
   background: var(--surface-alt);
 }
 
-.primary-action:hover { background: #1d4ed8; }
+.primary-action:hover { background: #195F5B; }
 .primary-action:disabled { opacity: 0.6; cursor: wait; }
 .period-button { min-width: 130px; }
 .alert-controls input,
@@ -530,7 +530,7 @@ select {
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: rgba(37, 99, 235, 0.08);
+  background: rgba(34, 122, 117, 0.1);
   color: var(--brand);
   font-size: 11px;
   font-weight: 700;
@@ -538,7 +538,7 @@ select {
 .event-dot.critical,
 .event-dot.blocked { background: rgba(220, 38, 38, 0.08); color: var(--critical); }
 .event-dot.high { background: rgba(217, 119, 6, 0.1); color: var(--warning); }
-.event-dot.medium { background: rgba(59, 130, 246, 0.08); color: #1d4ed8; }
+.event-dot.medium { background: rgba(195, 109, 73, 0.12); color: #A55238; }
 .event-dot.low { background: rgba(22, 163, 74, 0.08); color: var(--success); }
 .event b { display: block; margin-bottom: 4px; }
 .event p { margin: 0; color: var(--muted); font-size: 12px; }
@@ -556,7 +556,7 @@ select {
   width: 34px;
   height: 34px;
   margin-bottom: 16px;
-  border: 3px solid rgba(37, 99, 235, 0.12);
+  border: 3px solid rgba(34, 122, 117, 0.12);
   border-top-color: var(--brand);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
@@ -800,7 +800,7 @@ form {
   place-items: center;
   min-height: 100vh;
   padding: 24px;
-  background: linear-gradient(135deg, #eef4ff 0%, #f8fafc 45%, #f1f5f9 100%);
+  background: linear-gradient(135deg, #E2EBE3 0%, #F1F3ED 52%, #E9E5DC 100%);
 }
 .login-card {
   width: min(420px, 100%);
@@ -903,9 +903,9 @@ form {
   gap: 8px;
   margin-top: 18px;
   padding: 14px 12px;
-  border: 1px solid rgba(37, 99, 235, 0.12);
+  border: 1px solid rgba(34, 122, 117, 0.16);
   border-radius: 12px;
-  background: rgba(37, 99, 235, 0.03);
+  background: rgba(34, 122, 117, 0.045);
 }
 .report-result strong { font-size: 1rem; }
 .report-result span { color: var(--muted); }

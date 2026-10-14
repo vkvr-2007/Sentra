@@ -1,4 +1,4 @@
-# Sentra — Full‑Stack Security Event Monitoring Dashboard
+# SENTRA | Security Intelligence
 
 A full-stack security event monitoring platform built with **React**, **Express.js**, and **PostgreSQL**. SecureFlow provides a professional dashboard for analyzing security threats, monitoring suspic[...]
 
@@ -8,8 +8,8 @@ A full-stack security event monitoring platform built with **React**, **Express.
 ## Dashboard Preview
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/190adf32-7723-47c3-92bf-bdfb2b5b3825" width="48%" alt="SecureFlow Dashboard Overview" />
-  <img src="https://github.com/user-attachments/assets/7c477ae5-0ae0-44e7-bff3-ff2a1b42d615" width="48%" alt="SecureFlow Dashboard Details" />
+  <img src="https://github.com/user-attachments/assets/190adf32-7723-47c3-92bf-bdfb2b5b3825" width="48%" alt="Sentra Dashboard Overview" />
+  <img src="https://github.com/user-attachments/assets/7c477ae5-0ae0-44e7-bff3-ff2a1b42d615" width="48%" alt="Sentra Dashboard Details" />
 </p>
 
 ---
@@ -69,6 +69,12 @@ This project demonstrates essential full-stack engineering competencies:
 
 ## Key Features
 
+### Public Landing Page
+- Responsive Sentra overview appears before the demo login
+- Sample threat activity preview and capability summary
+- Existing remembered sessions open the dashboard directly; signing out returns to the landing page
+- Demo sign-in accepts any non-empty email and password and is not production authentication
+
 ### Dashboard
 - **Metric Cards**: Total events, Critical/High risk count, blocked events, events requiring review
 - **Threat Type Analysis**: Aggregated counts by threat category (SQL Injection, XSS, Brute Force, Malware)
@@ -118,9 +124,9 @@ This project demonstrates essential full-stack engineering competencies:
 | **Language** | JavaScript (ES6+) |
 | **Styling** | CSS3 |
 | **Backend** | Node.js + Express 5.2 |
-| **Database** | PostgreSQL |
+| **Database** | PostgreSQL (optional; CSV fallback available) |
 | **API Communication** | REST (Fetch API) |
-| **Data Import** | CSV parsing |
+| **Sample Data** | 60-event network log CSV fallback |
 | **Version Control** | Git/GitHub |
 
 ---
@@ -130,7 +136,7 @@ This project demonstrates essential full-stack engineering competencies:
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                      Browser / Client                       │
-│  React Component Tree (Dashboard, Alerts, Reports, etc.)   │
+│  React UI (Landing, Login, Dashboard, Alerts, Reports)      │
 └────────────────────────────┬────────────────────────────────┘
                              │ REST API (HTTP/JSON)
                              │
@@ -143,8 +149,8 @@ This project demonstrates essential full-stack engineering competencies:
                              │ SQL Queries
                              │
 ┌────────────────────────────┴────────────────────────────────┐
-│                 PostgreSQL Database                          │
-│  Table: public.security_events                              │
+│     PostgreSQL Database (optional) or bundled CSV           │
+│  public.security_events / sample-network-logs.csv           │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -153,7 +159,7 @@ This project demonstrates essential full-stack engineering competencies:
 ## Project Folder Structure
 
 ```
-secureflow/
+Sentra/
 ├── src/                          # Frontend (React)
 │   ├── App.jsx                  # Main dashboard component
 │   ├── App.css                  # Dashboard styling
@@ -171,7 +177,8 @@ secureflow/
 ├── index.html                    # HTML entry point
 ├── vite.config.js               # Vite build configuration
 ├── package.json                 # Frontend dependencies
-├── secureflow-security-events.csv  # Sample data
+├── sample-network-logs.csv       # 60-event offline API fallback
+├── secureflow-security-events.csv  # Legacy sample/export filename
 ├── eslint.config.js             # Code linting
 └── README.md                     # This file
 ```
@@ -212,7 +219,7 @@ The dashboard displays a concise security overview:
 
 ## Security Event Data Explanation
 
-Security events are stored in the PostgreSQL `security_events` table with the following structure:
+When PostgreSQL is connected, the API reads events from `public.security_events` using this structure:
 
 | Column | Type | Description | Example |
 |--------|------|-------------|---------|
@@ -234,6 +241,16 @@ Security events are stored in the PostgreSQL `security_events` table with the fo
 7. XSS Attempt (Medium) from 192.168.2.40 - Monitoring
 ```
 
+### Bundled Network Log CSV
+
+When PostgreSQL is unavailable, the API loads `sample-network-logs.csv`, a synthetic 60-event dataset spanning routine traffic, password spraying, scans, web attacks, malware, and response activity. Its 16 columns are:
+
+```text
+event_id,timestamp,src_ip,src_port,dst_ip,dst_port,protocol,direction,action,bytes_sent,bytes_received,threat_type,severity,asset,username,rule_id
+```
+
+The API preserves these source fields and adds the fields the dashboard expects: `id`, `ip_address`, `event_time`, `risk_level`, and `status`. `Informational` severity maps to `Low`; allowed, alerted, blocked, and quarantined actions map to the dashboard statuses `Resolved`, `Review`, and `Blocked`.
+
 ---
 
 ## API Endpoints
@@ -241,28 +258,30 @@ Security events are stored in the PostgreSQL `security_events` table with the fo
 All endpoints return JSON responses. The backend runs on `http://localhost:5000` by default.
 
 ### GET `/api/health`
-**Description**: Check API and database availability
+**Description**: Check API and database availability. The endpoint returns HTTP 200 while the API is serving, including when it falls back to CSV data.
 
 **Response (Success - 200):**
 ```json
 {
   "status": "OK",
+  "database": "connected",
   "message": "SecureFlow API and PostgreSQL are available"
 }
 ```
 
-**Response (Database Error - 503):**
+**Response when PostgreSQL is unavailable (200):**
 ```json
 {
-  "status": "ERROR",
-  "message": "SecureFlow API is running but PostgreSQL is unavailable"
+  "status": "OK",
+  "database": "unavailable",
+  "message": "PostgreSQL is unavailable; serving sample-network-logs.csv"
 }
 ```
 
 ---
 
 ### GET `/api/security-events`
-**Description**: Retrieve all security events from the database
+**Description**: Retrieve events from PostgreSQL or, when it is unavailable, the bundled CSV fallback.
 
 **Query Parameters**: None
 
@@ -288,17 +307,12 @@ All endpoints return JSON responses. The backend runs on `http://localhost:5000`
 ]
 ```
 
-**Error Response (500):**
-```json
-{
-  "error": "Database query failed"
-}
-```
+CSV-backed event responses include both the normalized dashboard fields and the original network-log columns.
 
 ---
 
 ### GET `/api/threat-summary`
-**Description**: Get aggregated counts of events by threat type
+**Description**: Get aggregated counts of events by threat type from PostgreSQL or the bundled CSV fallback.
 
 **Query Parameters**: None
 
@@ -324,16 +338,13 @@ All endpoints return JSON responses. The backend runs on `http://localhost:5000`
 ]
 ```
 
-**Error Response (500):**
-```json
-{
-  "error": "Database query failed"
-}
-```
+The fallback summary aggregates all events in `sample-network-logs.csv` and sorts threat types by count.
 
 ---
 
-## PostgreSQL Database Setup
+## PostgreSQL Database Setup (Optional)
+
+PostgreSQL is optional for local development. Without it, the API serves `sample-network-logs.csv`. Configure PostgreSQL only if you want the API to use a database instead of the bundled fallback.
 
 ### Database Schema
 
@@ -371,7 +382,7 @@ The backend connects to PostgreSQL using environment variables:
 ### Prerequisites
 
 - **Node.js** 18+ and npm
-- **PostgreSQL** 12+ (local or remote)
+- **PostgreSQL** 12+ (optional; CSV fallback works without it)
 - **Git**
 
 ### Step 1: Clone the Repository
@@ -416,7 +427,7 @@ node server.js
 npm run dev
 ```
 
-5. Open the frontend at `http://localhost:5173`; Vite proxies `/api` requests to the backend.
+5. Open `http://localhost:5173`. Signed-out users see the Sentra landing page; select **Sign in** to open the demo login. Any non-empty email and password work.
 
 ---
 
@@ -445,7 +456,7 @@ npm run dev
 
 The frontend calls the same-origin `/api` path. Vite proxies those requests to `http://localhost:5000` by default. Set `API_PROXY_TARGET` in the project-root environment to use a backend at a different address.
 
-When PostgreSQL is unavailable, the API remains usable and reads `sample-network-logs.csv`; `/api/health` reports the database as unavailable and identifies the sample-data fallback. To update the sample events, replace that file with a CSV using the same 16-column header and restart the backend. To use a differently named file, set `SAMPLE_LOGS_CSV=../my-network-logs.csv` in `server/.env`; the path is relative to the `server` directory. Restart the backend after changing the path or file.
+When PostgreSQL is unavailable, the API reads `sample-network-logs.csv`; `/api/health` reports the database as unavailable and identifies the fallback. To update the sample events, replace that file with a CSV using the same 16-column header and restart the backend. To use a differently named file, set `SAMPLE_LOGS_CSV=../my-network-logs.csv` in `server/.env`; the path is relative to the `server` directory. Restart the backend after changing the path or file.
 
 ---
 
@@ -585,25 +596,25 @@ curl -X GET http://localhost:5000/api/health
 ### Using JavaScript/Fetch
 
 ```javascript
-const API_URL = "http://localhost:5000";
+const API_URL = "/api";
 
 // Fetch all events
 async function getEvents() {
-  const response = await fetch(`${API_URL}/api/security-events`);
+  const response = await fetch(`${API_URL}/security-events`);
   const events = await response.json();
   console.log(events);
 }
 
 // Fetch threat summary
 async function getThreatSummary() {
-  const response = await fetch(`${API_URL}/api/threat-summary`);
+  const response = await fetch(`${API_URL}/threat-summary`);
   const summary = await response.json();
   console.log(summary);
 }
 
 // Check API health
 async function checkHealth() {
-  const response = await fetch(`${API_URL}/api/health`);
+  const response = await fetch(`${API_URL}/health`);
   const health = await response.json();
   console.log(health.status === "OK" ? "API Connected ✓" : "API Error ✗");
 }
@@ -682,7 +693,9 @@ npm run preview      # Preview production build locally
 
 - [ ] Frontend loads without errors
 - [ ] Backend API responds to requests
-- [ ] PostgreSQL database connection works
+- [ ] PostgreSQL database connection works (optional)
+- [ ] Signed-out visitor sees the Sentra landing page
+- [ ] Sign-in and return-to-landing navigation work
 - [ ] Health endpoint returns status
 - [ ] Security events load and display
 - [ ] Threat summary aggregates correctly
@@ -695,11 +708,11 @@ npm run preview      # Preview production build locally
 
 **Browser Console:**
 ```javascript
-// Check API URL
-console.log("API_URL:", "http://localhost:5000")
+// The frontend uses the same-origin Vite proxy
+console.log("API_URL:", "/api")
 
 // Test fetch
-fetch("http://localhost:5000/api/health")
+fetch("/api/health")
   .then(r => r.json())
   .then(d => console.log(d))
 ```
@@ -708,8 +721,8 @@ fetch("http://localhost:5000/api/health")
 ```bash
 # Backend error messages appear in terminal where server.js runs
 # Look for:
-# - "Health check failed"
-# - "Database query failed"
+# - "Health check failed; using bundled CSV data"
+# - "Security event query failed; using bundled CSV data"
 # - "SecureFlow API running on..."
 ```
 
@@ -805,18 +818,10 @@ This project is **portfolio-focused** and demonstrates core full-stack competenc
 
 ---
 
-## Author
-
-**Sanoj Sethi**  
-Portfolio: [GitHub](https://github.com/sanojsethi)  
-LinkedIn: [linkedin.com/in/sanojsethi](https://www.linkedin.com/in/sanojsethi)
-
----
-
 ## GitHub Repository
 
-**SecureFlow**  
-📍 [github.com/sanojsethi/SecureFlow](https://github.com/sanojsethi/SecureFlow)
+**SENTRA**
+📍 [github.com/vkvr-2007/Sentra](https://github.com/vkvr-2007/Sentra)
 
 **Repository Summary:**
 - Full-stack portfolio application
@@ -852,4 +857,4 @@ Have feedback or want to contribute? Here's how:
 ---
 
 **Built with ❤️ for Security Teams**  
-*SecureFlow — Monitor. Analyze. Respond. Secure.*
+*SENTRA — Security intelligence. In full view.*
