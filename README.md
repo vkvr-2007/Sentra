@@ -377,8 +377,8 @@ The backend connects to PostgreSQL using environment variables:
 ### Step 1: Clone the Repository
 
 ```bash
-git clone https://github.com/sanojsethi/SecureFlow.git
-cd SecureFlow
+git clone https://github.com/vkvr-2007/Sentra.git
+cd Sentra
 ```
 
 ### Step 2: Install Frontend Dependencies
