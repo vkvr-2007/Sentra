@@ -1,8 +1,7 @@
-# SecureFlow — Full‑Stack Security Event Monitoring Dashboard
+# Sentra — Full‑Stack Security Event Monitoring Dashboard
 
 A full-stack security event monitoring platform built with **React**, **Express.js**, and **PostgreSQL**. SecureFlow provides a professional dashboard for analyzing security threats, monitoring suspic[...]
 
-**Portfolio Project** | [View Repository](https://github.com/sanojsethi/SecureFlow) | Built for Portfolio & Learning
 
 ---
 
