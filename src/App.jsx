@@ -1,8 +1,9 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { defaultSettings, navItems } from "./data/securityData";
+import heroArt from "./assets/hero.png";
 import "./App.css";
 
-export const API_URL = "http://localhost:5000";
+export const API_URL = "/api";
 const SESSION_KEY = "secureflow-demo-session";
 const PROFILE_KEY = "secureflow-profile";
 const SETTINGS_KEY = "secureflow-settings";
@@ -155,7 +156,8 @@ function AdminProfile({ profile, onProfileSave, onBack }) {
   const [passwordOpen, setPasswordOpen] = useState(false);
   const [saved, setSaved] = useState(false);
   const save = (nextProfile) => { onProfileSave(nextProfile); setEditOpen(false); setSaved(true); };
-  return <section className="profile-layout"><div className="panel profile-card"><div className="large-avatar">{profile.name.charAt(0).toUpperCase() || "A"}</div><h2>{profile.name}</h2><p>{profile.role}</p><Badge>Active</Badge><div className="profile-actions"><button className="primary-action" onClick={() => setEditOpen(true)} type="button">Edit Profile</button><button className="secondary-action" onClick={() => setPasswordOpen(true)} type="button">Change Password</button>  <button className="secondary-action" onClick={onBack} type="button">Back to Overview</button></div></div><div className="panel profile-details"><div className="panel-heading"><div><h2>Administrator Details</h2><p>Profile information for this workspace</p></div></div><dl><dt>Email</dt><dd>{profile.email}</dd><dt>Role</dt><dd>{profile.role}</dd><dt>Last Login</dt><dd>{profile.lastLogin}</dd><dt>Account Created</dt><dd>{profile.accountCreated}</dd><dt>Status</dt><dd><Badge>Active</Badge></dd></dl>{saved && <p className="form-success" role="status">Profile updated successfully.</p>}</div>{editOpen && <ProfileModal profile={profile} onSave={save} onClose={() => setEditOpen(false)} />}{passwordOpen && <PasswordModal onClose={() => setPasswordOpen(false)} />}</section>;}
+  return <section className="profile-layout"><div className="panel profile-card"><div className="large-avatar">{profile.name.charAt(0).toUpperCase() || "A"}</div><h2>{profile.name}</h2><p>{profile.role}</p><Badge>Active</Badge><div className="profile-actions"><button className="primary-action" onClick={() => setEditOpen(true)} type="button">Edit Profile</button><button className="secondary-action" onClick={() => setPasswordOpen(true)} type="button">Change Password</button>  <button className="secondary-action" onClick={onBack} type="button">Back to Overview</button>
+</div></div><div className="panel profile-details"><div className="panel-heading"><div><h2>Administrator Details</h2><p>Profile information for this workspace</p></div></div><dl><dt>Email</dt><dd>{profile.email}</dd><dt>Role</dt><dd>{profile.role}</dd><dt>Last Login</dt><dd>{profile.lastLogin}</dd><dt>Account Created</dt><dd>{profile.accountCreated}</dd><dt>Status</dt><dd><Badge>Active</Badge></dd></dl>{saved && <p className="form-success" role="status">Profile updated successfully.</p>}</div>{editOpen && <ProfileModal profile={profile} onSave={save} onClose={() => setEditOpen(false)} />}{passwordOpen && <PasswordModal onClose={() => setPasswordOpen(false)} />}</section>;}
 
 function CreateAccount({ onCancel }) {
   const [form, setForm] = useState({ name: "", email: "", role: roles[1], password: "", confirm: "" });
@@ -170,13 +172,49 @@ function AccountPage({ onManage, onSecurity, health }) {
   return <section className="account-layout"><section className="panel page-panel"><h2>Account Information</h2><div className="account-list"><div><span>Account</span><strong>Admin</strong></div><div><span>Role</span><strong>Security Administrator</strong></div><div><span>Session Status</span><strong className="status-online">Active</strong></div><div><span>Security Status</span><strong className="status-online">Protected</strong></div><div><span>API Status</span><strong className={health?.status === "OK" ? "status-online" : "status-offline"}>{health?.status === "OK" ? "Connected" : "Unavailable"}</strong></div></div><div className="form-actions"><button className="primary-action" onClick={onManage} type="button">Manage Account</button><button className="secondary-action" onClick={onSecurity} type="button">Security Settings</button></div></section></section>;
 }
 
-function LoginPage({ onLogin }) {
+function LandingPage({ onSignIn }) {
+  const sampleEvents = [
+    ["09:25:02", "Critical", "Potential data exfiltration", "file-srv-01"],
+    ["09:07:39", "Critical", "Command-and-control beacon", "eng-lt-022"],
+    ["08:22:11", "High", "Password spray pattern", "vpn-gateway"],
+  ];
+  const activityBars = [34, 52, 43, 67, 48, 76, 59, 88, 63, 72, 46, 81, 57, 94, 69, 48, 77, 61, 85, 54, 73, 44, 66, 90];
+
+  return <main className="landing-shell" id="home">
+    <header className="landing-nav">
+      <a className="landing-brand" href="#home" aria-label="Sentra home"><img src={heroArt} alt="" /><span>SENTRA<small>SECURITY INTELLIGENCE</small></span></a>
+      <nav aria-label="Site navigation"><a href="#platform">Platform</a><a href="#capabilities">Capabilities</a></nav>
+      <button className="landing-nav-cta" onClick={onSignIn} type="button">Sign in <span aria-hidden="true">↗</span></button>
+    </header>
+    <section className="landing-hero" id="platform">
+      <div className="landing-copy">
+        <p className="landing-eyebrow"><span /> SECURITY OPERATIONS PLATFORM</p>
+        <h1>Security intelligence.<br /><em>In full view.</em></h1>
+        <p className="landing-description">See the signals that matter, understand the risk behind them, and move from alert to action with confidence.</p>
+        <div className="landing-actions"><button className="landing-primary" onClick={onSignIn} type="button">Enter your workspace <span aria-hidden="true">→</span></button><a className="landing-secondary" href="#capabilities">Explore the platform <span aria-hidden="true">↓</span></a></div>
+        <div className="landing-proof"><span>NETWORK</span><i /><span>IDENTITY</span><i /><span>ENDPOINT</span></div>
+      </div>
+      <div className="landing-console" aria-label="Sample security event activity">
+        <div className="console-header"><div><span className="console-mark">S</span><span>THREAT ACTIVITY<small>SAMPLE TELEMETRY</small></span></div><span className="console-indicator"><i /> SAMPLE</span></div>
+        <div className="console-overview"><div><span>EVENT STREAM</span><strong>Signals, with context.</strong></div><div className="console-date">13 OCT<br />2026</div></div>
+        <div className="console-chart" role="img" aria-label="Illustrative network activity bars">{activityBars.map((height, index) => <i key={index} style={{ "--bar-height": `${height}%` }} />)}</div>
+        <div className="console-list-label"><span>RECENT DETECTIONS</span><span>03 / 60</span></div>
+        <ul className="console-events">{sampleEvents.map(([time, severity, description, asset]) => <li key={time}><time>{time}</time><span className={`console-severity ${severity.toLowerCase()}`}>{severity}</span><span className="console-event-copy"><strong>{description}</strong><small>{asset}</small></span><span className="console-arrow" aria-hidden="true">↗</span></li>)}</ul>
+        <p className="console-note">Illustrative records from the bundled sample dataset</p>
+      </div>
+    </section>
+    <section className="landing-capabilities" id="capabilities"><div className="capabilities-heading"><span>ONE CLEARER PICTURE</span><p>From noisy signals to<br />decisive security work.</p></div><div className="capability-item"><span>01 / DETECT</span><p>Surface suspicious behavior across network, identity, and endpoint activity.</p></div><div className="capability-item"><span>02 / PRIORITIZE</span><p>Put severity, asset context, and incident status in the same view.</p></div><div className="capability-item"><span>03 / RESPOND</span><p>Investigate event details and keep follow-up work moving.</p></div></section>
+    <footer className="landing-footer"><span>SENTRA <i>·</i> SECURITY INTELLIGENCE</span><button onClick={onSignIn} type="button">Open workspace <span aria-hidden="true">↗</span></button></footer>
+  </main>;
+}
+
+function LoginPage({ onLogin, onBack }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [remember, setRemember] = useState(false);
   const [error, setError] = useState("");
   const submit = (event) => { event.preventDefault(); if (!email.trim() || !password.trim()) return setError("Enter an email and password to continue."); onLogin(remember); };
-  return <main className="login-shell"><div className="login-card"><div className="brand-lockup"><div className="brand-mark" aria-hidden="true">S</div><div><h2>SENTRA</h2><span>SECURITY INTELLIGENCE</span></div></div><h1>Welcome back</h1><p>Sign in to your security workspace.</p><form onSubmit={submit} noValidate><label>Email<input type="email" value={email} onChange={(event) => { setEmail(event.target.value); setError(""); }} autoComplete="email" autoFocus /></label><label>Password<input type="password" value={password} onChange={(event) => { setPassword(event.target.value); setError(""); }} autoComplete="current-password" /></label><label className="checkbox-label"><input checked={remember} onChange={(event) => setRemember(event.target.checked)} type="checkbox" /> Remember Me</label>{error && <p className="form-error" role="alert">{error}</p>}<button className="primary-action" type="submit">Sign In</button></form><small>Demo mode: use any non-empty credentials. Suggested account: admin@secureflow.local</small></div></main>;
+  return <main className="login-shell"><button className="login-back" onClick={onBack} type="button">← Back to Sentra</button><div className="login-card"><div className="brand-lockup"><div className="brand-mark" aria-hidden="true">S</div><div><h2>SENTRA</h2><span>SECURITY INTELLIGENCE</span></div></div><h1>Welcome back</h1><p>Sign in to your security workspace.</p><form onSubmit={submit} noValidate><label>Email<input type="email" value={email} onChange={(event) => { setEmail(event.target.value); setError(""); }} autoComplete="email" autoFocus /></label><label>Password<input type="password" value={password} onChange={(event) => { setPassword(event.target.value); setError(""); }} autoComplete="current-password" /></label><label className="checkbox-label"><input checked={remember} onChange={(event) => setRemember(event.target.checked)} type="checkbox" /> Remember Me</label>{error && <p className="form-error" role="alert">{error}</p>}<button className="primary-action" type="submit">Sign In</button></form><small>Demo mode: use any non-empty credentials. Suggested account: admin@secureflow.local</small></div></main>;
 }
 
 function AdminMenu({ onSelect }) {
@@ -198,6 +236,7 @@ function App() {
   const [error, setError] = useState("");
   const [lastRefresh, setLastRefresh] = useState("");
   const [authenticated, setAuthenticated] = useState(() => sessionStorage.getItem(SESSION_KEY) === "active" || localStorage.getItem(SESSION_KEY) === "active");
+  const [showLogin, setShowLogin] = useState(false);
   const [adminView, setAdminView] = useState("");
   const [logoutOpen, setLogoutOpen] = useState(false);
   const [profile, setProfile] = useState(() => readStorage(PROFILE_KEY, { name: "Admin", email: "admin@secureflow.local", role: "Security Administrator", lastLogin: "Today", accountCreated: "Local demo workspace" }));
@@ -212,7 +251,7 @@ function App() {
     try {
       const endpoints = [["/api/health", "health"], ["/api/security-events", "security events"], ["/api/threat-summary", "threat summary"]];
       const responses = await Promise.all(endpoints.map(async ([path, label]) => {
-        const response = await fetch(`${API_URL}${path}`);
+        const response = await fetch(`${API_URL}${path.slice(4)}`);
         if (!response.ok) throw new Error(`${label} endpoint returned HTTP ${response.status}.`);
         const payload = await response.json();
         if (path !== "/api/health" && !Array.isArray(payload)) throw new Error(`${label} endpoint returned an invalid response.`);
@@ -222,17 +261,15 @@ function App() {
       setData({ health, events, summary });
       setLastRefresh(new Date().toLocaleString());
     } catch (requestError) {
-      setError(`${requestError.message} Check that the backend is running at ${API_URL}.`);
+      setError(`${requestError.message} Check that the backend is available at ${API_URL}.`);
     } finally {
       requestInFlight.current = false;
       setLoading(false);
     }
   }, []);
-  // The request is a subscription to the authenticated session and is intentionally
-  // started after mount or login.
   // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => { if (authenticated) loadData(); }, [authenticated, loadData]);
-  useEffect(() => { document.title = `SENTRA | ${adminView ? adminView : activePage}`; }, [activePage, adminView]);
+  useEffect(() => { document.title = authenticated ? `SENTRA | ${adminView ? adminView : activePage}` : showLogin ? "SENTRA | Sign in" : "SENTRA | Security Intelligence"; }, [activePage, adminView, authenticated, showLogin]);
   useEffect(() => {
     if (!authenticated || !settings.liveMonitoring) return undefined;
     const interval = window.setInterval(loadData, Number(settings.refreshInterval) * 1000);
@@ -254,9 +291,9 @@ function App() {
     if (activePage === "Reports") return <ReportsPage {...data} onExport={exportEvents} />;
     return <SettingsPage settings={settings} onUpdate={updateSettings} onSave={saveSettings} saved={settingsSaved} health={data.health} lastRefresh={lastRefresh} loading={loading} onRefresh={loadData} />;
   }, [activePage, adminView, data, error, lastRefresh, loading, loadData, profile, saveProfile, saveSettings, settings, settingsSaved, updateSettings]);
-  if (!authenticated) return <LoginPage onLogin={(remember) => { setAuthenticated(true); (remember ? localStorage : sessionStorage).setItem(SESSION_KEY, "active"); }} />;
+  if (!authenticated) return showLogin ? <LoginPage onBack={() => setShowLogin(false)} onLogin={(remember) => { setAuthenticated(true); (remember ? localStorage : sessionStorage).setItem(SESSION_KEY, "active"); }} /> : <LandingPage onSignIn={() => setShowLogin(true)} />;
   const selectAdminAction = (action) => { if (action === "logout") setLogoutOpen(true); else if (action === "settings") { setAdminView(""); setActivePage("Settings"); } else setAdminView(action); };
-  const confirmLogout = () => { setLogoutOpen(false); setAdminView(""); setActivePage("Overview"); setAuthenticated(false); sessionStorage.removeItem(SESSION_KEY); localStorage.removeItem(SESSION_KEY); setData({ events: [], summary: [], health: null }); };
+  const confirmLogout = () => { setLogoutOpen(false); setAdminView(""); setActivePage("Overview"); setAuthenticated(false); setShowLogin(false); sessionStorage.removeItem(SESSION_KEY); localStorage.removeItem(SESSION_KEY); setData({ events: [], summary: [], health: null }); };
   return <div className="dashboard"><aside className="sidebar"><div className="brand-lockup"><div className="brand-mark" aria-hidden="true">S</div><div><h2>SENTRA</h2><span>SECURITY INTELLIGENCE</span></div></div><div className="workspace-label">WORKSPACE <span>PRO</span></div><nav aria-label="Primary navigation">{navItems.map(([label, icon]) => <button className={activePage === label && !adminView ? "active" : ""} key={label} onClick={() => { setAdminView(""); setActivePage(label); }} type="button"><span className="nav-icon" aria-hidden="true">{icon}</span>{label}</button>)}</nav></aside><main className="main"><header className="topbar"><div className="heading-block"><div className="breadcrumb">OPERATIONS <span>/</span> {adminView ? adminView.toUpperCase() : activePage.toUpperCase()}</div><h1>{adminView === "profile" ? "Admin Profile" : adminView === "create" ? "Create Account" : adminView === "account" ? "Account" : activePage === "Overview" ? "Security Overview" : activePage}</h1><p>PostgreSQL-backed security monitoring · {lastRefresh ? `Updated ${lastRefresh}` : "Awaiting first update"}</p></div><div className="topbar-actions"><div className={`live-status ${settings.liveMonitoring ? "" : "muted-status"}`}><span /> {settings.liveMonitoring ? "System operational" : "Monitoring paused"}</div><AdminMenu onSelect={selectAdminAction} /></div></header>{error && data.health && <div className="error-banner" role="alert">{error}<button className="text-button" onClick={loadData} type="button">Retry</button></div>}{pageContent}</main>{logoutOpen && <LogoutDialog onCancel={() => setLogoutOpen(false)} onConfirm={confirmLogout} />}</div>;
 }
 

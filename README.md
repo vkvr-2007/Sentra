@@ -401,8 +401,8 @@ cd ..
 
 A short guide to run the project locally for development:
 
-1. Create and seed the PostgreSQL database (see Backend Setup section).
-2. Add environment variables in `server/.env` (PGUSER, PGPASSWORD, PGHOST, PGPORT, PGDATABASE, PORT).
+1. Optionally create and seed the PostgreSQL database (see Backend Setup section). Without PostgreSQL, the API serves the bundled CSV sample data.
+2. Optionally add database connection variables in `server/.env` (PGUSER, PGPASSWORD, PGHOST, PGPORT, PGDATABASE, PORT).
 3. Start the backend server:
 
 ```bash
@@ -416,7 +416,7 @@ node server.js
 npm run dev
 ```
 
-5. Open the frontend at `http://localhost:5173` and verify the API health at `http://localhost:5000/api/health`.
+5. Open the frontend at `http://localhost:5173`; Vite proxies `/api` requests to the backend.
 
 ---
 
@@ -443,12 +443,9 @@ npm run dev
 
 ### Configuration
 
-The frontend API URL is configured in `src/App.jsx`:
-```javascript
-export const API_URL = "http://localhost:5000";
-```
+The frontend calls the same-origin `/api` path. Vite proxies those requests to `http://localhost:5000` by default. Set `API_PROXY_TARGET` in the project-root environment to use a backend at a different address.
 
-Change this if your backend runs on a different address.
+When PostgreSQL is unavailable, the API remains usable and reads `sample-network-logs.csv`; `/api/health` reports the database as unavailable and identifies the sample-data fallback. To update the sample events, replace that file with a CSV using the same 16-column header and restart the backend. To use a differently named file, set `SAMPLE_LOGS_CSV=../my-network-logs.csv` in `server/.env`; the path is relative to the `server` directory. Restart the backend after changing the path or file.
 
 ---
 

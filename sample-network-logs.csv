@@ -1,0 +1,61 @@
+event_id,timestamp,src_ip,src_port,dst_ip,dst_port,protocol,direction,action,bytes_sent,bytes_received,threat_type,severity,asset,username,rule_id
+1,2026-10-13T08:00:12Z,10.20.2.15,51842,10.20.1.10,53,UDP,internal,allowed,72,184,DNS query,Informational,dns01,jchen,DNS-ALLOW-01
+2,2026-10-13T08:01:04Z,10.20.4.12,53111,203.0.113.80,443,TCP,outbound,allowed,846,5241,TLS web session,Informational,eng-lt-022,apatel,WEB-EGRESS-01
+3,2026-10-13T08:02:36Z,10.20.2.24,60418,10.20.1.40,443,TCP,internal,allowed,392,1884,Identity provider sign-in,Low,idp01,mrivera,AUTH-BASELINE-02
+4,2026-10-13T08:04:09Z,10.20.2.36,49127,10.20.1.30,587,TCP,internal,allowed,1618,942,SMTP submission,Informational,mail-gw,kwilson,MAIL-RELAY-03
+5,2026-10-13T08:05:42Z,10.20.3.22,445,10.20.3.5,51322,TCP,internal,allowed,4096,18342,File share access,Low,file-srv-01,svc_backup,SMB-ALLOW-04
+6,2026-10-13T08:07:18Z,10.20.2.15,53304,10.20.1.10,53,UDP,internal,allowed,88,206,DNS query,Informational,dns01,jchen,DNS-ALLOW-01
+7,2026-10-13T08:09:03Z,10.20.1.20,443,203.0.113.44,51890,TCP,outbound,allowed,2741,12604,HTTPS API request,Informational,web-prod-01,svc_web,WEB-EGRESS-01
+8,2026-10-13T08:10:27Z,10.20.2.24,54560,10.20.1.40,443,TCP,internal,allowed,428,2076,Identity provider sign-in,Low,idp01,abrooks,AUTH-BASELINE-02
+9,2026-10-13T08:12:44Z,10.20.4.12,55021,198.51.100.52,443,TCP,outbound,allowed,1102,8470,Software repository access,Informational,eng-lt-022,apatel,DEV-EGRESS-02
+10,2026-10-13T08:14:16Z,10.20.2.36,50013,10.20.1.10,53,UDP,internal,allowed,94,219,DNS query,Informational,dns01,kwilson,DNS-ALLOW-01
+11,2026-10-13T08:16:55Z,10.20.3.22,49152,10.20.1.20,445,TCP,internal,blocked,512,0,Unauthorized SMB access attempt,Medium,web-prod-01,svc_backup,SMB-SEGMENT-07
+12,2026-10-13T08:18:21Z,10.20.2.15,51423,192.0.2.70,123,UDP,outbound,allowed,76,76,NTP time synchronization,Informational,ntp-relay,system,NTP-ALLOW-01
+13,2026-10-13T08:20:08Z,198.51.100.23,49812,10.20.3.5,443,TCP,inbound,allowed,164,2201,VPN authentication attempt,Low,vpn-gateway,unknown,VPN-AUTH-01
+14,2026-10-13T08:20:39Z,198.51.100.23,49815,10.20.3.5,443,TCP,inbound,blocked,208,0,VPN authentication failure,Medium,vpn-gateway,unknown,VPN-FAIL-05
+15,2026-10-13T08:21:02Z,198.51.100.23,49821,10.20.3.5,443,TCP,inbound,blocked,201,0,VPN authentication failure,Medium,vpn-gateway,unknown,VPN-FAIL-05
+16,2026-10-13T08:21:28Z,198.51.100.23,49829,10.20.3.5,443,TCP,inbound,blocked,217,0,VPN authentication failure,Medium,vpn-gateway,unknown,VPN-FAIL-05
+17,2026-10-13T08:22:11Z,198.51.100.23,49834,10.20.3.5,443,TCP,inbound,blocked,194,0,Password spray pattern detected,High,vpn-gateway,unknown,VPN-SPRAY-09
+18,2026-10-13T08:22:46Z,198.51.100.23,49841,10.20.3.5,443,TCP,inbound,blocked,199,0,Password spray pattern detected,High,vpn-gateway,unknown,VPN-SPRAY-09
+19,2026-10-13T08:24:03Z,198.51.100.23,49855,10.20.3.5,443,TCP,inbound,blocked,223,0,VPN account enumeration,High,vpn-gateway,unknown,VPN-ENUM-03
+20,2026-10-13T08:26:18Z,198.51.100.23,49888,10.20.3.5,443,TCP,inbound,blocked,182,0,Source rate limit applied,High,vpn-gateway,unknown,VPN-RATE-02
+21,2026-10-13T08:29:40Z,203.0.113.17,54902,10.20.3.5,443,TCP,inbound,allowed,171,2254,VPN authentication attempt,Low,vpn-gateway,unknown,VPN-AUTH-01
+22,2026-10-13T08:29:57Z,203.0.113.17,54908,10.20.3.5,443,TCP,inbound,allowed,364,6782,Successful VPN sign-in,Low,vpn-gateway,esantos,VPN-AUTH-02
+23,2026-10-13T08:33:12Z,203.0.113.17,55314,10.20.2.36,445,TCP,internal,blocked,432,0,VPN lateral movement policy violation,High,hr-ws-003,esantos,VPN-LATERAL-08
+24,2026-10-13T08:35:04Z,203.0.0.88,60001,10.20.1.20,443,TCP,inbound,allowed,74,0,TCP SYN probe,Low,web-prod-01,unknown,EDGE-SYN-01
+25,2026-10-13T08:35:05Z,203.0.0.88,60002,10.20.1.20,22,TCP,inbound,blocked,74,0,External SSH scan,Medium,web-prod-01,unknown,EDGE-SCAN-04
+26,2026-10-13T08:35:07Z,203.0.0.88,60003,10.20.1.20,3389,TCP,inbound,blocked,74,0,External RDP scan,Medium,web-prod-01,unknown,EDGE-SCAN-04
+27,2026-10-13T08:35:09Z,203.0.0.88,60004,10.20.1.20,5432,TCP,inbound,blocked,74,0,Database port scan,High,web-prod-01,unknown,EDGE-SCAN-07
+28,2026-10-13T08:35:12Z,203.0.0.88,60005,10.20.1.20,6379,TCP,inbound,blocked,74,0,Redis port scan,High,web-prod-01,unknown,EDGE-SCAN-07
+29,2026-10-13T08:35:18Z,203.0.0.88,60009,10.20.1.20,8080,TCP,inbound,blocked,74,0,Web service enumeration,Medium,web-prod-01,unknown,EDGE-SCAN-05
+30,2026-10-13T08:35:26Z,203.0.0.88,60014,10.20.1.20,443,TCP,inbound,blocked,462,0,Automated vulnerability scan,High,web-prod-01,unknown,EDGE-SCAN-09
+31,2026-10-13T08:37:41Z,10.20.1.20,39104,10.20.1.10,53,UDP,internal,allowed,94,205,DNS lookup for service health,Informational,dns01,svc_web,DNS-ALLOW-01
+32,2026-10-13T08:40:03Z,192.0.2.99,41220,10.20.1.20,443,TCP,inbound,allowed,1240,682,HTTPS request to public site,Low,web-prod-01,unknown,WEB-INBOUND-01
+33,2026-10-13T08:40:15Z,192.0.2.99,41226,10.20.1.20,443,TCP,inbound,allowed,931,4271,HTTPS request to public site,Low,web-prod-01,unknown,WEB-INBOUND-01
+34,2026-10-13T08:42:38Z,198.51.100.61,52210,10.20.1.20,443,TCP,inbound,alerted,982,312,SQL injection payload detected,High,web-prod-01,unknown,WAF-SQLI-11
+35,2026-10-13T08:42:44Z,198.51.100.61,52218,10.20.1.20,443,TCP,inbound,blocked,1120,0,SQL injection attempt blocked,High,web-prod-01,unknown,WAF-SQLI-11
+36,2026-10-13T08:43:09Z,198.51.100.61,52232,10.20.1.20,443,TCP,inbound,blocked,1064,0,Union-based SQL injection attempt,High,web-prod-01,unknown,WAF-SQLI-12
+37,2026-10-13T08:44:27Z,198.51.100.61,52249,10.20.1.20,443,TCP,inbound,blocked,843,0,Reflected cross-site scripting attempt,Medium,web-prod-01,unknown,WAF-XSS-06
+38,2026-10-13T08:46:02Z,198.51.100.61,52271,10.20.1.20,443,TCP,inbound,blocked,1204,0,Path traversal attempt,High,web-prod-01,unknown,WAF-PATH-08
+39,2026-10-13T08:47:56Z,198.51.100.61,52302,10.20.1.20,443,TCP,inbound,alerted,688,216,Repeated suspicious HTTP requests,High,web-prod-01,unknown,WAF-RATE-03
+40,2026-10-13T08:50:11Z,10.20.1.20,443,10.20.1.40,52381,TCP,internal,allowed,1240,628,Identity provider token validation,Informational,idp01,svc_web,AUTH-SVC-03
+41,2026-10-13T08:54:36Z,10.20.2.24,53841,10.20.1.10,53,UDP,internal,allowed,101,228,DNS query,Informational,dns01,abrooks,DNS-ALLOW-01
+42,2026-10-13T08:56:48Z,10.20.2.24,55204,203.0.113.80,443,TCP,outbound,allowed,782,8124,HTTPS web session,Informational,ops-ws-008,abrooks,WEB-EGRESS-01
+43,2026-10-13T09:02:17Z,10.20.4.12,50112,10.20.1.10,53,UDP,internal,allowed,110,251,DNS query,Informational,dns01,apatel,DNS-ALLOW-01
+44,2026-10-13T09:04:50Z,10.20.4.12,51174,198.51.100.90,443,TCP,outbound,alerted,1256,901,Unusual executable download,Medium,eng-lt-022,apatel,EDR-DOWNLOAD-14
+45,2026-10-13T09:05:22Z,10.20.4.12,51188,198.51.100.90,443,TCP,outbound,quarantined,48210,0,Malware download quarantined,High,eng-lt-022,apatel,EDR-MALWARE-21
+46,2026-10-13T09:06:04Z,10.20.4.12,51201,198.51.100.91,443,TCP,outbound,blocked,304,0,Known malicious domain connection,High,eng-lt-022,apatel,EDR-C2-06
+47,2026-10-13T09:07:39Z,10.20.4.12,51224,198.51.100.91,443,TCP,outbound,blocked,298,0,Command and control beacon attempt,Critical,eng-lt-022,apatel,EDR-C2-10
+48,2026-10-13T09:08:10Z,10.20.4.12,51237,198.51.100.91,53,UDP,outbound,blocked,89,0,Suspicious DNS tunneling pattern,High,eng-lt-022,apatel,DNS-ANOMALY-08
+49,2026-10-13T09:10:33Z,10.20.1.40,443,10.20.4.12,51348,TCP,internal,alerted,220,180,Endpoint isolated by EDR,High,eng-lt-022,security_bot,EDR-ISOLATE-02
+50,2026-10-13T09:14:26Z,10.20.2.15,51928,10.20.1.10,53,UDP,internal,allowed,82,192,DNS query,Informational,dns01,jchen,DNS-ALLOW-01
+51,2026-10-13T09:18:57Z,10.20.3.22,50444,10.20.1.40,445,TCP,internal,alerted,8432,614,Unusual SMB authentication activity,Medium,idp01,svc_backup,SMB-AUTH-12
+52,2026-10-13T09:19:32Z,10.20.3.22,50451,10.20.2.15,445,TCP,internal,blocked,7012,0,SMB lateral movement attempt,High,finance-ws-014,svc_backup,SMB-LATERAL-09
+53,2026-10-13T09:21:18Z,10.20.2.15,52005,10.20.3.22,445,TCP,internal,allowed,16384,48211,Finance file share access,Low,file-srv-01,jchen,SMB-ALLOW-04
+54,2026-10-13T09:24:49Z,10.20.3.22,49822,203.0.113.120,443,TCP,outbound,alerted,482190,1204,Unusual outbound data transfer,High,file-srv-01,svc_backup,EXFIL-VOLUME-15
+55,2026-10-13T09:25:02Z,10.20.3.22,49831,203.0.113.120,443,TCP,outbound,blocked,902144,0,Potential data exfiltration blocked,Critical,file-srv-01,svc_backup,EXFIL-BLOCK-19
+56,2026-10-13T09:27:41Z,10.20.3.22,49844,10.20.1.40,443,TCP,internal,allowed,448,1280,Service account token validation,Informational,idp01,svc_backup,AUTH-SVC-03
+57,2026-10-13T09:33:12Z,10.20.3.5,443,198.51.100.23,49702,TCP,outbound,blocked,0,0,VPN source automatically blacklisted,Medium,vpn-gateway,security_bot,VPN-BLOCK-12
+58,2026-10-13T09:41:05Z,10.20.1.20,443,10.20.1.10,53,UDP,internal,allowed,88,194,Post-incident service health check,Informational,dns01,svc_web,DNS-ALLOW-01
+59,2026-10-13T10:02:38Z,10.20.2.36,52283,203.0.113.80,443,TCP,outbound,allowed,923,7834,HTTPS web session,Informational,hr-ws-003,kwilson,WEB-EGRESS-01
+60,2026-10-13T10:15:54Z,10.20.4.12,52310,10.20.1.40,443,TCP,internal,blocked,428,0,Isolated endpoint access denied,High,idp01,apatel,EDR-ISOLATE-02
