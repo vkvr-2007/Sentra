@@ -5,13 +5,6 @@ A full-stack security event monitoring platform built with **React**, **Express.
 
 ---
 
-## Dashboard Preview
-
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/7c477ae5-0ae0-44e7-bff3-ff2a1b42d615" width="48%" alt="Sentra Dashboard Details" />
-</p>
-
----
 
 ## Project Overview
 
